@@ -1,0 +1,72 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/spaceshooter/PNG/Enemies/enemyBlue5.png" type="Texture" id=1]
+[ext_resource path="res://gameplay/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://assets/font/FC Subject Rounded Bold [Non-commercial use].otf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 3 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 42.6109, 49.0588 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 19.0201, 26.7608 )
+
+[node name="Enemy" type="KinematicBody2D"]
+position = Vector2( 145.822, 86.2017 )
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 2 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = -105.753
+margin_top = 17.9158
+margin_right = 95.2468
+margin_bottom = 105.916
+size_flags_stretch_ratio = 0.0
+custom_fonts/normal_font = SubResource( 1 )
+bbcode_enabled = true
+bbcode_text = "
+[center]เฟริส[/center]"
+text = "
+เฟริส"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Node2D" type="Sprite" parent="."]
+rotation = 1.5708
+texture = ExtResource( 1 )
+region_rect = Rect2( 420.615, 811.967, 96.3705, 87.2922 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 45.8775
+margin_top = 15.8289
+margin_right = 86.0712
+margin_bottom = 57.8289
+custom_fonts/font = SubResource( 2 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 4 )
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[connection signal="tree_entered" from="CollisionShape2D" to="." method="_on_CollisionShape2D_tree_entered"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

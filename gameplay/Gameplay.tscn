@@ -1,0 +1,406 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/spaceshooter/Backgrounds/black.png" type="Texture" id=1]
+[ext_resource path="res://assets/font/FC Subject Rounded Bold [Non-commercial use].otf" type="DynamicFontData" id=2]
+[ext_resource path="res://gameplay/Gameplay.gd" type="Script" id=3]
+[ext_resource path="res://assets/spaceshooter/PNG/playerShip2_orange.png" type="Texture" id=4]
+[ext_resource path="res://gameplay/Player.gd" type="Script" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 26.8818, 306.619 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 25
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 30
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 50
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 27
+font_data = ExtResource( 2 )
+
+[node name="Gameplay" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="BackGround" type="TextureRect" parent="."]
+margin_left = -12.0
+margin_top = 0.877502
+margin_right = 1036.0
+margin_bottom = 605.878
+texture = ExtResource( 1 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" type="Node2D" parent="."]
+position = Vector2( 100, 300 )
+script = ExtResource( 5 )
+
+[node name="LoseArea" type="Area2D" parent="Player" groups=[
+"player",
+]]
+position = Vector2( 0.18103, -1.15732 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/LoseArea"]
+position = Vector2( -69.1992, 1.9809 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Player/LoseArea"]
+position = Vector2( -69.2421, 0.831238 )
+rotation = 1.5708
+scale = Vector2( 0.75, 0.75 )
+texture = ExtResource( 4 )
+
+[node name="PlayerHpLabel" type="Label" parent="Player"]
+margin_left = -61.375
+margin_top = -45.2572
+margin_right = -21.375
+margin_bottom = -3.25717
+custom_fonts/font = SubResource( 2 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpawnContainer" type="Node2D" parent="."]
+
+[node name="Position2D2" type="Position2D" parent="SpawnContainer"]
+position = Vector2( 1035, 190 )
+
+[node name="Position2D3" type="Position2D" parent="SpawnContainer"]
+position = Vector2( 1035, 300 )
+
+[node name="Position2D4" type="Position2D" parent="SpawnContainer"]
+position = Vector2( 1036.19, 410 )
+
+[node name="EnemyContainer" type="Node2D" parent="."]
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 6.6
+
+[node name="GameTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopRow2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 42.0
+mouse_filter = 2
+
+[node name="TopRow4" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/TopRow2"]
+margin_right = 337.0
+margin_bottom = 42.0
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="EscLabel" type="Label" parent="CanvasLayer/VBoxContainer/TopRow2/TopRow4"]
+margin_top = 3.0
+margin_right = 138.0
+margin_bottom = 39.0
+size_flags_horizontal = 9
+custom_fonts/font = SubResource( 3 )
+text = "Esc : พักเกม"
+
+[node name="DifficultyValue" type="Label" parent="CanvasLayer/VBoxContainer/TopRow2/TopRow4"]
+visible = false
+margin_left = 114.0
+margin_top = 1.0
+margin_right = 139.0
+margin_bottom = 55.0
+size_flags_horizontal = 2
+custom_fonts/font = SubResource( 3 )
+text = "0"
+
+[node name="TopRow2" type="CenterContainer" parent="CanvasLayer/VBoxContainer/TopRow2"]
+margin_left = 341.0
+margin_right = 678.0
+margin_bottom = 42.0
+mouse_filter = 2
+size_flags_horizontal = 3
+
+[node name="DifficultyLabel" type="Label" parent="CanvasLayer/VBoxContainer/TopRow2/TopRow2"]
+visible = false
+margin_left = 131.0
+margin_top = 3.0
+margin_right = 206.0
+margin_bottom = 39.0
+size_flags_horizontal = 0
+custom_fonts/font = SubResource( 3 )
+text = " ด่าน : "
+
+[node name="LvValue" type="Label" parent="CanvasLayer/VBoxContainer/TopRow2/TopRow2"]
+margin_left = 160.0
+margin_top = 3.0
+margin_right = 176.0
+margin_bottom = 39.0
+size_flags_horizontal = 2
+custom_fonts/font = SubResource( 3 )
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopRow3" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/TopRow2"]
+margin_left = 682.0
+margin_right = 1020.0
+margin_bottom = 42.0
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="GameTimeLabel" type="Label" parent="CanvasLayer/VBoxContainer/TopRow2/TopRow3"]
+margin_left = 154.0
+margin_right = 249.0
+margin_bottom = 42.0
+size_flags_horizontal = 10
+custom_fonts/font = SubResource( 4 )
+text = " เวลา : "
+
+[node name="GameTimeValue" type="Label" parent="CanvasLayer/VBoxContainer/TopRow2/TopRow3"]
+margin_left = 253.0
+margin_right = 338.0
+margin_bottom = 42.0
+size_flags_horizontal = 9
+custom_fonts/font = SubResource( 4 )
+text = "00:00"
+align = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/VBoxContainer/TopRow2"]
+margin_left = 1024.0
+margin_right = 1024.0
+margin_bottom = 42.0
+
+[node name="MiddleRow" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+margin_top = 46.0
+margin_right = 1024.0
+margin_bottom = 520.0
+mouse_filter = 2
+size_flags_vertical = 3
+
+[node name="BottomRow" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+margin_top = 524.0
+margin_right = 1024.0
+margin_bottom = 600.0
+mouse_filter = 2
+custom_constants/separation = 100
+
+[node name="SkillCol" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/BottomRow"]
+margin_right = 274.0
+margin_bottom = 76.0
+size_flags_horizontal = 3
+
+[node name="SkillRowBar" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/BottomRow/SkillCol"]
+margin_right = 274.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SkillRow" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/BottomRow/SkillCol"]
+margin_top = 40.0
+margin_right = 274.0
+margin_bottom = 76.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SkillLabel" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/SkillCol/SkillRow"]
+margin_right = 135.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 3 )
+text = " สกิลพิเศษ : "
+
+[node name="SkillValue" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/SkillCol/SkillRow"]
+margin_left = 139.0
+margin_right = 155.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 3 )
+text = "0"
+
+[node name="SkillMax" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/SkillCol/SkillRow"]
+visible = false
+margin_left = 190.0
+margin_right = 232.0
+margin_bottom = 56.0
+custom_fonts/font = SubResource( 3 )
+text = "/3"
+
+[node name="BottomRow2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/BottomRow"]
+margin_left = 374.0
+margin_right = 649.0
+margin_bottom = 76.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/separation = 30
+
+[node name="EnemyKillLabel" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/BottomRow2"]
+margin_top = 20.0
+margin_right = 115.0
+margin_bottom = 56.0
+custom_fonts/font = SubResource( 3 )
+text = "   Killed : "
+
+[node name="EnemyKillValue" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/BottomRow2"]
+margin_left = 145.0
+margin_top = 20.0
+margin_right = 161.0
+margin_bottom = 56.0
+custom_fonts/font = SubResource( 3 )
+text = "0"
+
+[node name="KillCol" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/BottomRow"]
+margin_left = 749.0
+margin_right = 1024.0
+margin_bottom = 76.0
+size_flags_horizontal = 3
+
+[node name="BottomRow2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/BottomRow/KillCol"]
+margin_right = 275.0
+margin_bottom = 36.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/separation = 30
+alignment = 2
+
+[node name="WaveLabel" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/KillCol/BottomRow2"]
+margin_right = 204.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 3 )
+text = "                 รอบ : "
+
+[node name="WaveValue" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/KillCol/BottomRow2"]
+margin_left = 234.0
+margin_right = 275.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 3 )
+text = "0"
+align = 1
+
+[node name="BottomRow" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/BottomRow/KillCol"]
+margin_top = 40.0
+margin_right = 275.0
+margin_bottom = 76.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/separation = 30
+alignment = 2
+
+[node name="EnemyKillLabel" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/KillCol/BottomRow"]
+margin_right = 208.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 3 )
+text = "                กำจัด : "
+align = 1
+
+[node name="EnemyKillValue" type="Label" parent="CanvasLayer/VBoxContainer/BottomRow/KillCol/BottomRow"]
+margin_left = 238.0
+margin_right = 275.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 3 )
+text = "0"
+align = 1
+
+[node name="GameoverScreen" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/GameoverScreen"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 593.0
+mouse_filter = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameoverScreen/CenterContainer"]
+margin_left = 421.0
+margin_top = 210.0
+margin_right = 588.0
+margin_bottom = 375.0
+custom_constants/separation = 50
+
+[node name="Label" type="Label" parent="CanvasLayer/GameoverScreen/CenterContainer/VBoxContainer"]
+margin_right = 167.0
+margin_bottom = 70.0
+custom_fonts/font = SubResource( 5 )
+text = "ล้มเหลว"
+
+[node name="RestartButtom" type="Button" parent="CanvasLayer/GameoverScreen/CenterContainer/VBoxContainer"]
+margin_top = 120.0
+margin_right = 167.0
+margin_bottom = 165.0
+custom_fonts/font = SubResource( 6 )
+text = "เล่นใหม่"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="GamePausedScreen" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer2" type="CenterContainer" parent="CanvasLayer/GamePausedScreen"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 593.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GamePausedScreen/CenterContainer2"]
+margin_left = 431.0
+margin_top = 210.0
+margin_right = 579.0
+margin_bottom = 375.0
+custom_constants/separation = 50
+
+[node name="Label" type="Label" parent="CanvasLayer/GamePausedScreen/CenterContainer2/VBoxContainer"]
+margin_right = 148.0
+margin_bottom = 70.0
+custom_fonts/font = SubResource( 5 )
+text = "พักเกม"
+
+[node name="ContinueButtom" type="Button" parent="CanvasLayer/GamePausedScreen/CenterContainer2/VBoxContainer"]
+pause_mode = 2
+margin_top = 120.0
+margin_right = 148.0
+margin_bottom = 165.0
+custom_fonts/font = SubResource( 6 )
+text = "เล่นต่อ"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[connection signal="body_entered" from="Player/LoseArea" to="." method="_on_LoseArea_body_entered"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]
+[connection signal="pressed" from="CanvasLayer/GameoverScreen/CenterContainer/VBoxContainer/RestartButtom" to="." method="_on_RestartButtom_pressed"]
+[connection signal="pressed" from="CanvasLayer/GamePausedScreen/CenterContainer2/VBoxContainer/ContinueButtom" to="." method="_on_ContinueButtom_pressed"]
